@@ -26,7 +26,7 @@ d3.json("data/samples.json").then((importedData) => {
         // console.log(fileteredID);
 
         let sampleValues = fileteredID.sample_values;
-        console.log(sampleValues);
+        // console.log(sampleValues);
 
         let otuIDs = fileteredID.otu_ids;
         // console.log(otuIDs);
@@ -35,9 +35,9 @@ d3.json("data/samples.json").then((importedData) => {
         // console.log(otuLabels);
 
         trace = {
-           x: ,
-           y: ,
-           text: ,
+           x: otuIDs,
+           y: sampleValues,
+           text: otuLabels,
            name: "Bar Graph",
            type: "bar",
            orientation: "h" 
