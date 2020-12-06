@@ -1,7 +1,7 @@
 //Use d3.json() to fetch the data from the JSON file
 //The data within the json file is arbitrarily called importedData
 d3.json("data/samples.json").then((importedData) => {
-    console.log(importedData)
+    // console.log(importedData)
 
     let data = importedData;
 
@@ -15,7 +15,7 @@ d3.json("data/samples.json").then((importedData) => {
         let section = d3.select("#selDataset");
 
         section.append("option").text(member);
-    });
+    })
     // });
 
     // Initialize the page with a default plot
@@ -34,28 +34,39 @@ d3.json("data/samples.json").then((importedData) => {
         let otuLabels = fileteredID.otu_labels;
         // console.log(otuLabels);
 
+        let top10SampleValues = sampleValues.slice(0, 10).reverse();
+        // console.log(top10SampleValues);
+
+        let top10OtuIDs = otuIDs.slice(0, 10).reverse();
+        // console.log(top10OtuIDs);
+
+        let top10OtuLabels = otuLabels.slice(0, 10).reverse();
+        // console.log(top10OtuLabels);
+
         trace = {
-           x: otuIDs,
-           y: sampleValues,
-           text: otuLabels,
-           name: "Bar Graph",
-           type: "bar",
-           orientation: "h" 
+            x: top10SampleValues,
+            y: top10OtuIDs.map(id => `OTU ${id}`),
+            text: top10OtuLabels,
+            type: "bar",
+            orientation: "h"
         }
 
         let traceData = [trace]
 
         let layout = {
-            title: "Top 10 OTUs",
-            xaxis: {title: "OTU IDs"},
-            yaxis: {title: "Sample Values"}
+            title: "Top 10 Microbial Species (OTUs)",
+            yaxis: { title: "OTU IDs" },
+            xaxis: { title: "Sample Values" },
+            margin: {
+                l: 100,
+                r: 100,
+                t: 100,
+                b: 100
+            }
         }
 
         Plotly.newPlot("bar", traceData, layout);
     }
 
     init();
-
-});
-
-
+})
