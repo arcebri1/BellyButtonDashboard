@@ -66,6 +66,31 @@ d3.json("data/samples.json").then((importedData) => {
         }
 
         Plotly.newPlot("bar", traceData, layout);
+
+        let trace2 = {
+            x: top10OtuIDs,
+            y: top10SampleValues,
+            text: top10OtuLabels,
+            mode: 'markers',
+            marker: {
+              color: top10OtuIDs,
+              size: top10SampleValues
+            }
+          };
+          
+          var trace2Data = [trace2];
+          
+          var layout2 = {
+            // title: 'Bubble Chart Hover Text',
+            showlegend: false,
+            height: 600,
+            width: 600,
+            xaxis: {title: "OTU ID"}
+          };
+          
+          Plotly.newPlot('bubble', trace2Data, layout2);
+
+
     }
 
     init();
