@@ -1,7 +1,7 @@
 //Use d3.json() to fetch the data from the JSON file
 //The data within the json file is arbitrarily called importedData
 d3.json("data/samples.json").then((importedData) => {
-    // console.log(importedData)
+    console.log(importedData)
 
     let data = importedData;
 
@@ -43,7 +43,7 @@ d3.json("data/samples.json").then((importedData) => {
         let top10OtuLabels = otuLabels.slice(0, 10).reverse();
         // console.log(top10OtuLabels);
 
-    //Create horizontal bar graph
+        //Create horizontal bar graph
         trace = {
             x: top10SampleValues,
             y: top10OtuIDs.map(id => `OTU ${id}`),
@@ -68,29 +68,48 @@ d3.json("data/samples.json").then((importedData) => {
 
         Plotly.newPlot("bar", traceData, layout);
 
-    //Create bubble graph
-
+        //Create bubble graph
         let trace2 = {
             x: top10OtuIDs,
             y: top10SampleValues,
             text: top10OtuLabels,
             mode: 'markers',
             marker: {
-              color: top10OtuIDs,
-              size: top10SampleValues
+                color: top10OtuIDs,
+                size: top10SampleValues
             }
-          };
-          
-          var trace2Data = [trace2];
-          
-          var layout2 = {
+        };
+
+        var trace2Data = [trace2];
+
+        var layout2 = {
             showlegend: false,
             height: 600,
             width: 1000,
-            xaxis: {title: "OTU ID"}
-          };
-          
-          Plotly.newPlot('bubble', trace2Data, layout2);
+            xaxis: { title: "OTU ID" }
+        };
+
+        Plotly.newPlot('bubble', trace2Data, layout2);
+
+        //Create default demographic info for ID: 940
+        let filterMetadata = data.metadata[0]
+        // console.log(filterMetadata);
+
+        Object.entries(filterMetadata).forEach(([key, value]) => {
+            // Log the key and value
+            console.log(`${key}: ${value}`);
+        })
+        // filterMetadata.forEach(function(item, index) {
+        //     return `${index}: ${item}`
+        // })
+        // d3.select("sample-metadata")
+        //     .data(filterMetadata)
+        //     .enter()
+        //     .text(d => {
+        //         return d
+        //     })
+
+
 
 
     }
