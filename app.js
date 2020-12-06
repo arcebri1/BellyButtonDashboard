@@ -97,8 +97,12 @@ d3.json("data/samples.json").then((importedData) => {
 
         Object.entries(filterMetadata).forEach(([key, value]) => {
             // Log the key and value
-            console.log(`${key}: ${value}`);
+            // console.log(`${key}: ${value}`);
+            d3.select("#sample-metadata")
+                .append("p")
+                .text(`${key}:${value}`)
         })
+
         // filterMetadata.forEach(function(item, index) {
         //     return `${index}: ${item}`
         // })
