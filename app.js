@@ -43,6 +43,7 @@ d3.json("data/samples.json").then((importedData) => {
         let top10OtuLabels = otuLabels.slice(0, 10).reverse();
         // console.log(top10OtuLabels);
 
+    //Create horizontal bar graph
         trace = {
             x: top10SampleValues,
             y: top10OtuIDs.map(id => `OTU ${id}`),
@@ -67,6 +68,8 @@ d3.json("data/samples.json").then((importedData) => {
 
         Plotly.newPlot("bar", traceData, layout);
 
+    //Create bubble graph
+
         let trace2 = {
             x: top10OtuIDs,
             y: top10SampleValues,
@@ -81,10 +84,9 @@ d3.json("data/samples.json").then((importedData) => {
           var trace2Data = [trace2];
           
           var layout2 = {
-            // title: 'Bubble Chart Hover Text',
             showlegend: false,
             height: 600,
-            width: 600,
+            width: 1000,
             xaxis: {title: "OTU ID"}
           };
           
