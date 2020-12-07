@@ -70,13 +70,13 @@ d3.json("data/samples.json").then((importedData) => {
 
         //Create bubble graph
         let trace2 = {
-            x: top10OtuIDs,
-            y: top10SampleValues,
-            text: top10OtuLabels,
+            x: otuIDs,
+            y: sampleValues,
+            text: otuLabels,
             mode: 'markers',
             marker: {
-                color: top10OtuIDs,
-                size: top10SampleValues
+                color: otuIDs,
+                size: sampleValues
             }
         };
 
@@ -140,12 +140,18 @@ d3.json("data/samples.json").then((importedData) => {
         let top10OtuLabels = otuLabels.slice(0, 10).reverse();
         // console.log(top10OtuLabels);
 
-
-
-        // Since we have a default plot, we must restyle it according to the ID called
+        // Since we have a default plot, we must restyle the plots according to the ID called up
+        //Restyle bar grapg
         Plotly.restyle("bar", "x", [top10SampleValues]);
         Plotly.restyle("bar", "y", [top10OtuIDs]);
-        Plotly.restyle("bar", "text", [top10OtuLabels])
+        Plotly.restyle("bar", "text", [top10OtuLabels]);
+
+        //Restyle the bubble graph
+        Plotly.restyle("bubble", "x", [otuIDs]);
+        Plotly.restyle("bubble", "y", [sampleValues]);
+        Plotly.restyle("bubble", "text", [otuLabels]);
+        Plotly.restyle("bubble", "marker.color", [otuIDs]);
+        Plotly.restyle("buble", "marker.size", [sampleValues]);
     }
 
     init();
