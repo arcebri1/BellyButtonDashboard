@@ -102,21 +102,53 @@ d3.json("data/samples.json").then((importedData) => {
                 .append("p")
                 .text(`${key}:${value}`)
         })
+    }
+    // init();
 
-        // filterMetadata.forEach(function(item, index) {
-        //     return `${index}: ${item}`
-        // })
-        // d3.select("sample-metadata")
-        //     .data(filterMetadata)
-        //     .enter()
-        //     .text(d => {
-        //         return d
-        //     })
+    // Call updatePlotly() when a change takes place to the DOM
+    d3.selectAll("#selDataset").on("change", optionChanged);
+
+    // This function is called when a dropdown menu item is selected
+    function optionChanged() {
+        // Use D3 to select the dropdown menu
+        let dropdownMenu = d3.select("#selDataset");
+        // console.log(dropdownMenu)
+        // Assign the value of the dropdown menu option to a variable
+        let dataset = dropdownMenu.node().value;
+        // console.log(dataset)
+
+        let filteredID = data.samples.filter(subject => subject.id === dataset)[0];
+        console.log(filteredID);
+
+        let sampleValues = filteredID.sample_values;
+        // console.log(sampleValues);
+
+        let otuIDs = filteredID.otu_ids;
+        // console.log(otuIDs);
+
+        let otuLabels = filteredID.otu_labels;
+        // console.log(otuLabels);
+
+        let top10SampleValues = sampleValues.slice(0, 10).reverse();
+        // console.log(top10SampleValues);
+
+        let top10OtuIDs = otuIDs.slice(0, 10).reverse();
+        // console.log(top10OtuIDs);
+
+        let top10OtuLabels = otuLabels.slice(0, 10).reverse();
+        // console.log(top10OtuLabels);
 
 
 
-
+        // Note the extra brackets around 'x' and 'y'
+    //     Plotly.restyle(CHART, "x", [x]);
+    //     Plotly.restyle(CHART, "y", [y]);
     }
 
     init();
+
+
+
+
+
 })
