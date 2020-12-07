@@ -143,7 +143,7 @@ d3.json("data/samples.json").then((importedData) => {
         // Since we have a default plot, we must restyle the plots according to the ID called up
         //Restyle bar grapg
         Plotly.restyle("bar", "x", [top10SampleValues]);
-        Plotly.restyle("bar", "y", [top10OtuIDs]);
+        Plotly.restyle("bar", "y", [top10OtuIDs.map(id => `OTU ${id}`)]);
         Plotly.restyle("bar", "text", [top10OtuLabels]);
 
         //Restyle the bubble graph
