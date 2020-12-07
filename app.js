@@ -56,8 +56,8 @@ d3.json("data/samples.json").then((importedData) => {
 
         let layout = {
             title: "Top 10 Microbial Species (OTUs)",
-            yaxis: { title: "OTU IDs" },
-            xaxis: { title: "Sample Values" },
+            yaxis: { title: "OTU ID" },
+            xaxis: { title: "Sample Value" },
             margin: {
                 l: 100,
                 r: 100,
@@ -86,7 +86,9 @@ d3.json("data/samples.json").then((importedData) => {
             showlegend: false,
             height: 600,
             width: 1000,
-            xaxis: { title: "OTU ID" }
+            xaxis: { title: "OTU ID" },
+            yaxis: {title: "Sample Value"},
+            title: "Microbial Species Found per Sample"
         };
 
         Plotly.newPlot('bubble', trace2Data, layout2);
@@ -95,6 +97,7 @@ d3.json("data/samples.json").then((importedData) => {
         let filterMetadata = data.metadata[0]
         // console.log(filterMetadata);
 
+        // Use `Object.entries` to add each key and value pair to the panel
         Object.entries(filterMetadata).forEach(([key, value]) => {
             // Log the key and value
             // console.log(`${key}: ${value}`);
@@ -159,6 +162,10 @@ d3.json("data/samples.json").then((importedData) => {
         let filterMetadata = data.metadata.filter(subject => subject.id == dataset)[0];
         console.log(filterMetadata);
 
+         //Use `.html("") to clear any existing metadata
+        d3.select("#sample-metadata").html("");
+
+        // Use `Object.entries` to add each key and value pair to the panel
         Object.entries(filterMetadata).forEach(([key, value]) => {
             // console.log(`${key}: ${value}`);
             d3.select("#sample-metadata")
