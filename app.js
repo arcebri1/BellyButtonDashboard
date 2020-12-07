@@ -110,9 +110,11 @@ d3.json("data/samples.json").then((importedData) => {
 
     // This function is called when a dropdown menu item is selected
     function optionChanged() {
+
         // Use D3 to select the dropdown menu
         let dropdownMenu = d3.select("#selDataset");
         // console.log(dropdownMenu)
+
         // Assign the value of the dropdown menu option to a variable
         let dataset = dropdownMenu.node().value;
         // console.log(dataset)
@@ -140,9 +142,10 @@ d3.json("data/samples.json").then((importedData) => {
 
 
 
-        // Note the extra brackets around 'x' and 'y'
-    //     Plotly.restyle(CHART, "x", [x]);
-    //     Plotly.restyle(CHART, "y", [y]);
+        // Since we have a default plot, we must restyle it according to the ID called
+        Plotly.restyle("bar", "x", [top10SampleValues]);
+        Plotly.restyle("bar", "y", [top10OtuIDs]);
+        Plotly.restyle("bar", "text", [top10OtuLabels])
     }
 
     init();
