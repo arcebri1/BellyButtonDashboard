@@ -117,7 +117,7 @@ d3.json("data/samples.json").then((importedData) => {
 
         // Assign the value of the dropdown menu option to a variable
         let dataset = dropdownMenu.node().value;
-        // console.log(dataset)
+        console.log(dataset)
 
         let filteredID = data.samples.filter(subject => subject.id === dataset)[0];
         console.log(filteredID);
@@ -151,7 +151,20 @@ d3.json("data/samples.json").then((importedData) => {
         Plotly.restyle("bubble", "y", [sampleValues]);
         Plotly.restyle("bubble", "text", [otuLabels]);
         Plotly.restyle("bubble", "marker.color", [otuIDs]);
-        Plotly.restyle("buble", "marker.size", [sampleValues]);
+        Plotly.restyle("bubble", "marker.size", [sampleValues]);
+
+        //Have the demographic info change depending on the ID selected
+        //Remember that the id is an integer and the dropdown input value is not
+        //So either change the input to a float or use 2 equal signs instead of 3
+        let filterMetadata = data.metadata.filter(subject => subject.id == dataset)[0];
+        console.log(filterMetadata);
+
+        Object.entries(filterMetadata).forEach(([key, value]) => {
+            // console.log(`${key}: ${value}`);
+            d3.select("#sample-metadata")
+                .append("p")
+                .text(`${key}:${value}`)
+        })
     }
 
     init();
