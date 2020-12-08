@@ -1,7 +1,7 @@
 //Use d3.json() to fetch the data from the JSON file
 //The data within the json file is arbitrarily called importedData
 d3.json("data/samples.json").then((importedData) => {
-    console.log(importedData)
+    // console.log(importedData)
 
     let data = importedData;
 
@@ -85,7 +85,7 @@ d3.json("data/samples.json").then((importedData) => {
         var layout2 = {
             showlegend: false,
             height: 600,
-            width: 1000,
+            width: 1200,
             xaxis: { title: "OTU ID" },
             yaxis: {title: "Sample Value"},
             title: "Microbial Species Found per Sample"
@@ -117,9 +117,24 @@ d3.json("data/samples.json").then((importedData) => {
                 title: { text: "Belly Button Washing Frequency" },
                 type: "indicator",
                 mode: "gauge+number",
-                gauge: { axis: { range: [null, 9] } }
+                gauge: { 
+                    axis: { range: [null, 9] }, 
+                    steps: [
+                        {range: [0, 1], color: "floralwhite"},
+                        {range: [1, 2], color: "antiquewhite"},
+                        {range: [2, 3], color: "beige"},
+                        {range: [3, 4], color: "bisque"},
+                        {range: [4, 5], color: "blanchedalmond"},
+                        {range: [5, 6], color: "cornsilk"},
+                        {range: [6, 7], color: "ivory"},
+                        {range: [7, 8], color: "lightgoldenrodyellow"},
+                        {range: [8, 9], color: "linen"}
+                    ]
+                }
             }
         ];
+
+        
         
         let gaugeLayout = { width: 600, height: 500, margin: { t: 0, b: 0 } };
         Plotly.newPlot('gauge', gaugeData, gaugeLayout);
@@ -139,10 +154,10 @@ d3.json("data/samples.json").then((importedData) => {
 
         // Assign the value of the dropdown menu option to a variable
         let dataset = dropdownMenu.node().value;
-        console.log(dataset)
+        // console.log(dataset)
 
         let filteredID = data.samples.filter(subject => subject.id === dataset)[0];
-        console.log(filteredID);
+        // console.log(filteredID);
 
         let sampleValues = filteredID.sample_values;
         // console.log(sampleValues);
@@ -179,7 +194,7 @@ d3.json("data/samples.json").then((importedData) => {
         //Remember that the id is an integer and the dropdown input value is not
         //So either change the input to a float or use 2 equal signs instead of 3
         let filterMetadata = data.metadata.filter(subject => subject.id == dataset)[0];
-        console.log(filterMetadata);
+        // console.log(filterMetadata);
 
          //Use `.html("") to clear any existing metadata
         d3.select("#sample-metadata").html("");
@@ -191,6 +206,13 @@ d3.json("data/samples.json").then((importedData) => {
                 .append("p")
                 .text(`${key}:${value}`)
         })
+
+        //Gauge chart
+
+        let allWfreq = filterMetadata.wfreq;
+        // console.log(allWfreq)
+
+        Plotly.restyle("gauge", "value", [allWfreq]);
     }
 
     init();
