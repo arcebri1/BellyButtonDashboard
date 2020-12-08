@@ -105,6 +105,25 @@ d3.json("data/samples.json").then((importedData) => {
                 .append("p")
                 .text(`${key}:${value}`)
         })
+
+        //Optional : Gauge Chart
+        let wfreq = filterMetadata.wfreq
+        console.log(wfreq)
+
+        let gaugeData = [
+            {
+                domain: { x: [0, 1], y: [0, 1] },
+                value: wfreq,
+                title: { text: "Belly Button Washing Frequency" },
+                type: "indicator",
+                mode: "gauge+number",
+                gauge: { axis: { range: [null, 9] } }
+            }
+        ];
+        
+        let gaugeLayout = { width: 600, height: 500, margin: { t: 0, b: 0 } };
+        Plotly.newPlot('gauge', gaugeData, gaugeLayout);
+
     }
     // init();
 
