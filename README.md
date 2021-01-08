@@ -24,7 +24,7 @@ The dataset catalogs the microbes that colonize human navels, and reveals that a
 
 6. Adapted the Gauge Chart from <https://plot.ly/javascript/gauge-charts/> to plot the weekly washing frequency of the individual.
 
-7. Deployed the app to [GitHub Pages](). 
+7. Deployed the app to [GitHub Pages](https://arcebri1.github.io/BellyButtonDashboard/). 
 
 ### About the Data
 
