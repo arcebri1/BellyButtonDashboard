@@ -26,6 +26,8 @@ The dataset catalogs the microbes that colonize human navels, and reveals that a
 
 7. Deployed the app to [GitHub Pages](https://arcebri1.github.io/BellyButtonDashboard/). 
 
+![](images/webapp.gif)
+
 ### About the Data
 
 Hulcr, J. et al.(2012) _A Jungle in There: Bacteria in Belly Buttons are Highly Diverse, but Predictable_. Retrieved from: [http://robdunnlab.com/projects/belly-button-biodiversity/results-and-data/](http://robdunnlab.com/projects/belly-button-biodiversity/results-and-data/)
